@@ -843,6 +843,7 @@ class indexModel extends CI_Model
         $this->db->where('Coupon_code', $coupon_code);
         $this->db->where('Start_date <=', date('Y-m-d H:i:s'));
         $this->db->where('End_date >=', date('Y-m-d H:i:s'));
+        $this->db->where('Status', 1);
         $query = $this->db->get('discount');
         return $query->row();
     }
