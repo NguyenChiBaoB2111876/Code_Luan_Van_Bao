@@ -106,24 +106,29 @@ $sidebar_menu = [
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
+                <?php
+                $user = $this->session->userdata('logged_in_admin');
+                if (!$user) {
+                    $user = $this->session->userdata('logged_in_customer');
+                }  
+                $avatar = !empty($user['avatar']) ? base_url('uploads/user/' . $user['avatar']) : base_url('uploads/user/User-avatar.png');
+                $username = !empty($user['username']) ? $user['username'] : 'Người dùng';
+                ?>
                 <div class="dropdown profile-element">
                     <span>
-                        <img width="50" height="50" class="img-circle"
-                            src="<?php echo base_url('uploads/user/1743060974cabybara.jpg') ?>" />
+                        <img width="50" height="50" class="img-circle" src="<?php echo $avatar; ?>" />
                     </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
-                            <span class="block m-t-xs"><strong class="font-bold">Hữu Thuận</strong></span>
-                            <span class="text-muted text-xs block">Thao tác<b class="caret"></b></span>
+                            <span class="block m-t-xs"><strong class="font-bold"><?php echo $username; ?></strong></span>
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url('logout_admin'); ?>">Logout</a></li>
                     </ul>
                 </div>
-                <div class="logo-element">IN+</div>
+                <div class="logo-element">Home</div>
             </li>
 
             <?php foreach ($sidebar_menu as $key => $menu): ?>
